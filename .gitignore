@@ -1,0 +1,15 @@
+
+# Created by .ignore support plugin (hsz.mobi)
+*.iml
+.idea/
+*/target/
+.DS_Store
+.settings/
+.classpath
+.project
+MANIFEST.MF
+*/logs/
+velocity.log*
+*/generatorConfig.xml
+logPath_IS_UNDEFINED/
+logs/
