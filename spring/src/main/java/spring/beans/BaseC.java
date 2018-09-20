@@ -1,4 +1,4 @@
-package spring.controller;
+package spring.beans;
 
 public interface BaseC {
 }

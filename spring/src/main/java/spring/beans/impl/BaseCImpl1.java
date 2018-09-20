@@ -1,9 +1,9 @@
-package spring.controller.impl;
+package spring.beans.impl;
 
 import lombok.extern.java.Log;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-import spring.controller.BaseC;
+import spring.beans.BaseC;
 
 @Log
 @Component

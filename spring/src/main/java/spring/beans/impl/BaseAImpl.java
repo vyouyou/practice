@@ -1,7 +1,7 @@
-package spring.controller.impl;
+package spring.beans.impl;
 
 import org.springframework.stereotype.Component;
-import spring.controller.BaseA;
+import spring.beans.BaseA;
 
 @Component
 public class BaseAImpl implements BaseA {
