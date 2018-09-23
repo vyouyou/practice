@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button id="btn" onclick="request()">request</button>
+    <button onclick="xmltest()">xmltest</button>
+</body>
+
+<script>
+    var xmlRequest = new XMLHttpRequest();
+    xmlRequest.onreadystatechange = function (ev) {
+        console.log(xmlRequest);
+    }
+
+    function request() {
+        console.log("request")
+        xmlRequest.open("POST", "http://127.0.0.1:8080/cors", true);
+        xmlRequest.send();
+    }
+
+    function xmltest() {
+        xmlRequest.open("POST", "http://127.0.0.1:8080/xmlobject", true);
+        xmlRequest.send();
+    }
+</script>
+</html>
