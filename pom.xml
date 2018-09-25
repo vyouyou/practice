@@ -9,6 +9,7 @@
     <modules>
         <module>spring</module>
         <module>reactive</module>
+        <module>effectivejava</module>
     </modules>
     <packaging>pom</packaging>
 
