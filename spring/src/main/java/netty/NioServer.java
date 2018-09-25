@@ -1,15 +1,20 @@
 package netty;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import lombok.extern.java.Log;
 
+import java.util.Arrays;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
+@Log
 public class NioServer {
     public static void main(String[] args) {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -20,15 +25,26 @@ public class NioServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
-                        socketChannel
-                                .pipeline()
-                                .addLast(new SimpleChannelInboundHandler<Byte[]>() {
-                                    @Override
-                                    protected void messageReceived(ChannelHandlerContext channelHandlerContext, Byte[] bytes) throws Exception {
-
-                                    }
-                                });
+                        socketChannel.pipeline().addLast(new ChannelInboundHandler());
                     }
                 });
+        Integer[] ports = {15000, 15001
+                , 15002
+        };
+        ExecutorService service = Executors.newCachedThreadPool();
+        Arrays.asList(ports).stream().forEach(integer -> {
+            service.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Channel channel = serverBootstrap.bind(integer).sync().channel();
+                        log.info("i am channel" + channel.localAddress().toString());
+                        channel.closeFuture().sync();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        });
     }
 }
