@@ -25,12 +25,16 @@ public class NioServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
-                        socketChannel.pipeline().addLast(new ChannelInboundHandler());
+                        ChannelPipeline pipeline = socketChannel.pipeline();
+                        ChannelInboundHandler handler = new ChannelInboundHandler();
+                        pipeline.addLast(handler);
+                        pipeline.addLast(new ChannelInboundHandler());
                     }
                 });
         Integer[] ports = {15000, 15001
                 , 15002
         };
+
         ExecutorService service = Executors.newCachedThreadPool();
         Arrays.asList(ports).stream().forEach(integer -> {
             service.submit(new Runnable() {
