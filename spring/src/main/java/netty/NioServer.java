@@ -31,9 +31,7 @@ public class NioServer {
                         pipeline.addLast(new ChannelInboundHandler());
                     }
                 });
-        Integer[] ports = {15000, 15001
-                , 15002
-        };
+        Integer[] ports = {15000, 15001, 15002};
 
         ExecutorService service = Executors.newCachedThreadPool();
         Arrays.asList(ports).stream().forEach(integer -> {

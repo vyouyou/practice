@@ -11,6 +11,7 @@
         <module>reactive</module>
         <module>effectivejava</module>
         <module>base</module>
+        <module>dbconnpool</module>
     </modules>
     <packaging>pom</packaging>
 
