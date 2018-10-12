@@ -5,7 +5,6 @@ import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.logging.Logger;
 
 @Log
 public class ReactorGenerotor {
