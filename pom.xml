@@ -12,6 +12,7 @@
         <module>effectivejava</module>
         <module>base</module>
         <module>dbconnpool</module>
+        <module>concurrency</module>
     </modules>
     <packaging>pom</packaging>
 
