@@ -26,10 +26,8 @@ public class ChannelInboundHandler extends ChannelInboundHandlerAdapter {
         ByteBuf byteBuf = (ByteBuf) msg;
         byte[] data = new byte[byteBuf.readableBytes()];
         byteBuf.readBytes(data);
-        log.info(data + "");
-
-        byteBuf = Unpooled.copiedBuffer(intsToBytes(new int[]{32, 0x1006, 0, 0, 0, 0, 0, 0}));
-        ctx.writeAndFlush(byteBuf);
+        ByteBuf newbyteBuf = Unpooled.copiedBuffer(intsToBytes(new int[]{32, 0x1023, 0, 0, 0, 0, 0, 0}));
+        ctx.channel().writeAndFlush(newbyteBuf);
 
     }
 
@@ -45,5 +43,19 @@ public class ChannelInboundHandler extends ChannelInboundHandlerAdapter {
         return bytes;
     }
 
-    ;
+    public static int[] bytesToInts(byte[] bytes) {
+        int[] ints = new int[0];
+        for (int i = 0; i < bytes.length; i += 4) {
+            ints = ArrayUtils.addAll(ints, bytesToInt(ArrayUtils.subarray(bytes, i, i + 4)));
+        }
+        return ints;
+    }
+
+    public static int bytesToInt(byte[] bytes) {
+        return bytes[3] & 0xFF |
+                (bytes[2] & 0xFF) << 8 |
+                (bytes[1] & 0xFF) << 16 |
+                (bytes[0] & 0xFF) << 24;
+    }
+
 }

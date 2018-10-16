@@ -28,23 +28,19 @@ public class NioServer {
                         ChannelPipeline pipeline = socketChannel.pipeline();
                         ChannelInboundHandler handler = new ChannelInboundHandler();
                         pipeline.addLast(handler);
-                        pipeline.addLast(new ChannelInboundHandler());
                     }
                 });
         Integer[] ports = {15000, 15001, 15002};
 
         ExecutorService service = Executors.newCachedThreadPool();
         Arrays.asList(ports).stream().forEach(integer -> {
-            service.submit(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Channel channel = serverBootstrap.bind(integer).sync().channel();
-                        log.info("i am channel" + channel.localAddress().toString());
-                        channel.closeFuture().sync();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+            service.submit(() -> {
+                try {
+                    Channel channel = serverBootstrap.bind(integer).sync().channel();
+                    log.info("i am channel" + channel.localAddress().toString());
+                    channel.closeFuture().sync();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             });
         });
