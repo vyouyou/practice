@@ -2,8 +2,7 @@ package taskcancel;
 
 import lombok.extern.java.Log;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.*;
 
 /**
  * sleep是可以响应interrupt方法的
@@ -16,15 +15,16 @@ import java.util.concurrent.LinkedBlockingQueue;
 @Log
 public class TaskCancel {
     public static void main(String[] args) {
-//        Thread t = new Thread(() -> {
-//            try {
-//                Thread.sleep(5000);
-//            } catch (InterruptedException e) {
-//                log.info(e.getMessage());
-//                e.printStackTrace();
-//            }
-//        });
-//        t.start();
-//        t.interrupt();
+        Thread t = new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                log.info(e.getMessage());
+                e.printStackTrace();
+            }
+        });
+        t.start();
+        t.interrupt();
+
     }
 }

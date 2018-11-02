@@ -17,7 +17,7 @@ public class EmailService implements ApplicationEventPublisherAware {
     @Resource
     private ApplicationContext applicationContext;
 
-    private static ApplicationEventPublisher applicationEventPublisher;
+    private ApplicationEventPublisher applicationEventPublisher;
     @Override
     public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
         if (applicationEventPublisher == null){
