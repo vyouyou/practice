@@ -1,5 +1,24 @@
 user:
   name: haha
   sex: nan
+spring:
+  datasource:
+    url: jdbc:mysql://39.106.24.103:3306/youyou_dev?useSSL=false
+    username: root
+    password: 1234566
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
 server:
-  port: 8080
+  port: 8888
