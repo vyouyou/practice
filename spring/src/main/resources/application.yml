@@ -22,3 +22,11 @@ spring:
     mode: LEGACYHTML5
 server:
   port: 8888
+mybatis:
+  mapper-locations: classpath:com.youyou.mybatis/*mapper.xml
+  config-location: classpath:com.youyou.mybatis/mybatis-config.xml
+shiro:
+  filter-chain-definitions:
+    /login: anon
+#    /**: authc
+
