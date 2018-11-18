@@ -7,7 +7,10 @@ spring:
     username: root
     password: 1234566
     driver-class-name: com.mysql.jdbc.Driver
-
+  redis:
+    host: 39.106.24.103
+    port: 6379
+    database: 1
   jpa:
     database: mysql
     show-sql: true
@@ -29,4 +32,13 @@ shiro:
   filter-chain-definitions:
     /login: anon
 #    /**: authc
+shiro-redis:
+  enabled: true
+  redis-manager:
+    host: 39.106.24.103:6379
+    database: 1
+logging:
+  level:
+    spring.repository: debug
+
 

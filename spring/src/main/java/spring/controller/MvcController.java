@@ -4,26 +4,26 @@ import ch.qos.logback.core.util.TimeUtil;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.ServletRequest;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
+@RestController
 @Log
-@Controller
 public class MvcController {
     @GetMapping("/to-baidu")
     public ModelAndView toBaidu() {
@@ -31,7 +31,8 @@ public class MvcController {
         return modelAndView;
     }
 
-    @GetMapping("/method")
+    @GetMapping(path = "/method")
+    @RequiresPermissions(value = {"normal:read"})
     @ResponseBody
     public String method(WebRequest webRequest, ServletRequest request) {
         log.info("i am host:" + webRequest.getHeader("host"));

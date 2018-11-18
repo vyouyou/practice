@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * 用户model
  *
@@ -14,7 +16,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class UserModel {
+public class UserModel implements Serializable{
     private Integer id;
 
     private String username;

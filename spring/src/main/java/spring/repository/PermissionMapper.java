@@ -1,5 +1,6 @@
 package spring.repository;
 
+import org.apache.ibatis.annotations.Param;
 import spring.model.PermissionModel;
 
 import java.util.List;
@@ -10,5 +11,5 @@ import java.util.List;
  * @since 1.0.0
  */
 public interface PermissionMapper {
-    List<PermissionModel> queryPermissionsByIds(String ids);
+    List<PermissionModel> queryPermissionsByIds(@Param(value = "ids") String ids);
 }

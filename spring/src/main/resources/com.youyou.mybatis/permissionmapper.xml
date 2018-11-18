@@ -4,7 +4,7 @@
     <select id="queryPermissionsByIds" resultType="spring.model.PermissionModel">
         select * from permission p
         <where>
-            p.id in ids;
+            p.id in ${ids}
         </where>
     </select>
 </mapper>

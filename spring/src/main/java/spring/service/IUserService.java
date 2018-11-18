@@ -1,7 +1,10 @@
 package spring.service;
 
+import spring.model.PermissionModel;
 import spring.model.UserModel;
 import spring.request.LoginRequest;
+
+import java.util.List;
 
 /**
  * @author qisy01
@@ -13,4 +16,6 @@ public interface IUserService {
     Boolean login(LoginRequest loginRequest);
 
     UserModel getUserByUsername(String username);
+
+    List<PermissionModel> permissionList(Integer roleId);
 }
