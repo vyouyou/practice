@@ -5,6 +5,9 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.interceptor.PerformanceMonitorInterceptor;
+import org.springframework.aop.support.NameMatchMethodPointcutAdvisor;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -17,5 +20,12 @@ public class WebLogAspect {
     public Object logInterceptor(ProceedingJoinPoint pjp) throws Throwable {
         log.info("request start");
         return pjp.proceed();
+    }
+
+    public void weaver(){
+        ProxyFactory weaver = new ProxyFactory(new Object());
+        NameMatchMethodPointcutAdvisor advisor = new NameMatchMethodPointcutAdvisor();
+        advisor.setMappedName("execute");
+        advisor.setAdvice(new PerformanceMonitorInterceptor());
     }
 }
