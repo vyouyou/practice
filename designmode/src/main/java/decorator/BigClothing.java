@@ -1,5 +1,7 @@
 package decorator;
 
+import java.lang.reflect.Method;
+
 /**
  * @author qisy01
  * @create 18-10-17

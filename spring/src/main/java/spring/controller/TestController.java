@@ -4,12 +4,10 @@ import lombok.extern.java.Log;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 import spring.annotation.Qual;
-import spring.beans.BaseA;
-import spring.beans.BaseBImpl;
-import spring.beans.BaseC;
-import spring.beans.Component;
+import spring.beans.*;
 import spring.dto.TestDTO;
 import spring.event.BlackListNotifier;
 import spring.event.EmailService;
@@ -22,7 +20,8 @@ public class TestController {
     private BaseA baseA;
 
     @Autowired
-    private BaseBImpl baseB;
+    @Lazy
+    private BaseB baseB;
 
     @Qual(value = "baseCImpl1")
     @Autowired
@@ -30,7 +29,7 @@ public class TestController {
 
     @GetMapping("/")
     public String h() {
-        baseB.sayIam();
+        baseB.baseB();
         return "h";
     }
 

@@ -5,8 +5,10 @@ import org.springframework.stereotype.Component;
 import spring.beans.BaseB;
 
 @Log
-public class BaseBImpl implements BaseB {
-    public void sayIam(){
+public class BaseBImpl implements BaseB{
+
+    @Override
+    public void baseB() {
         log.info("i am b");
     }
 }

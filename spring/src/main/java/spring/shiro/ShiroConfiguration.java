@@ -38,6 +38,7 @@ public class ShiroConfiguration {
         Map<String, String> filterChainMap = new LinkedHashMap<>();
         filterChainMap.put("/logout", "logout");
         filterChainMap.put("/login", "anon");
+        filterChainMap.put("/", "anon");
         filterChainMap.put("/method", "authc");
         filterChainMap.put("/**", "authc");
         factoryBean.setFilterChainDefinitionMap(filterChainMap);

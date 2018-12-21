@@ -9,10 +9,11 @@ import java.lang.reflect.Proxy;
  */
 public class ProxyMain {
     public static void main(String[] args) {
-        IHello sayHello = (IHello) Proxy.newProxyInstance(
+        IHello1 sayHello = (IHello1) Proxy.newProxyInstance(
                 ProxyMain.class.getClassLoader(),
-                new Class[]{IHello.class},
+                new Class[]{IHello.class,IHello1.class},
                 new MyInvocation());
         sayHello.sayHello("haha");
+        sayHello.sayByebyte();
     }
 }

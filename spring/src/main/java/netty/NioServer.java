@@ -1,24 +1,22 @@
 package netty;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.java.Log;
 
-import java.util.Arrays;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.nio.channels.SelectionKey;
 
 @Log
 public class NioServer {
     public static void main(String[] args) {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        EventLoopGroup workerGroup = new NioEventLoopGroup(1);
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
@@ -32,17 +30,24 @@ public class NioServer {
                 });
         Integer[] ports = {15000, 15001, 15002};
 
-        ExecutorService service = Executors.newCachedThreadPool();
-        Arrays.asList(ports).stream().forEach(integer -> {
-            service.submit(() -> {
-                try {
-                    Channel channel = serverBootstrap.bind(integer).sync().channel();
-                    log.info("i am channel" + channel.localAddress().toString());
-                    channel.closeFuture().sync();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-        });
+        try {
+            Channel channel = serverBootstrap.bind(15000).sync().channel();
+            log.info("i am channel" + channel.localAddress().toString());
+            channel.closeFuture().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        ExecutorService service = Executors.newCachedThreadPool();
+//        Arrays.asList(ports).stream().forEach(integer -> {
+//            service.submit(() -> {
+//                try {
+//                    Channel channel = serverBootstrap.bind(integer).sync().channel();
+//                    log.info("i am channel" + channel.localAddress().toString());
+//                    channel.closeFuture().sync();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            });
+//        });
     }
 }
